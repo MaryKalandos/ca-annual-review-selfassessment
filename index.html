@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annual Self-Reflection — Chiropractic Assistant</title>
+  <meta name="description" content="Annual Performance Review — Part A: Employee Self-Reflection" />
+
+  <!-- ============================================================
+       EMBEDDED STYLES
+       Designed to feel supportive, reflective, and modern.
+       Easy to customise — main colours live in :root below.
+  ============================================================ -->
+  <style>
+    :root {
+      /* Brand palette — change these to re-skin the form */
+      --bg:          #F6F4EF;          /* warm off-white background */
+      --card:        #FFFFFF;          /* card surface */
+      --ink:        #2C3A3A;           /* primary text */
+      --muted:      #6A7878;           /* secondary text */
+      --line:       #E4E1DA;           /* dividers / borders */
+      --accent:     #7C9D88;           /* sage green */
+      --accent-soft:#E8F0EB;           /* light sage tint */
+      --accent-deep:#5E7E6B;           /* deeper sage for hover */
+      --gold:       #C8A96A;           /* warm accent for icons */
+      --error:      #C25B5B;
+      --success:    #4A7C59;
+      --radius:     16px;
+      --radius-sm:  10px;
+      --shadow:     0 4px 24px rgba(44, 58, 58, 0.06);
+      --shadow-lg:  0 10px 40px rgba(44, 58, 58, 0.10);
+      --font:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ---------- Header ---------- */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header .logo {
+      max-width: 320px;
+      width: 70%;
+      height: auto;
+      margin: 0 auto 22px;
+      display: block;
+    }
+    /* Wordmark fallback (used if no logo image file is dropped in /public) */
+    .wordmark { line-height: 1; }
+    .wordmark .top {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: -0.005em;
+    }
+    .wordmark .bottom {
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      color: var(--ink);
+      margin-top: 6px;
+      text-indent: 0.42em;     /* visual centering compensation for letter-spacing */
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 18px 0 8px;
+      color: var(--ink);
+    }
+    .header .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .wordmark .top    { font-size: 40px; }
+      .wordmark .bottom { font-size: 13px; letter-spacing: 0.36em; }
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 36px 32px;
+      margin-bottom: 24px;
+      border: 1px solid var(--line);
+    }
+
+    /* ---------- Section header w/ icon ---------- */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-head .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .section-head .section-sub {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* ---------- Form basics ---------- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .field { margin-bottom: 18px; }
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    label .required {
+      color: var(--accent-deep);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: var(--font);
+      font-size: 15px;
+      color: var(--ink);
+      background: #FBFAF7;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-sm);
+      transition: all 0.18s ease;
+      outline: none;
+    }
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    input[type="date"]:hover,
+    textarea:hover {
+      border-color: #C9C5BC;
+      background: #FFFFFF;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(124, 157, 136, 0.12);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    /* ---------- Question blocks ---------- */
+    .question {
+      margin-bottom: 28px;
+      padding-bottom: 4px;
+    }
+    .question:last-child { margin-bottom: 0; }
+    .question .q-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .question .q-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .question .q-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* ---------- Acknowledgment ---------- */
+    .ack-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+    .ack-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--accent-deep);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .ack-row label {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    /* ---------- Submit ---------- */
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary {
+      background: var(--accent-deep);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(94, 126, 107, 0.25);
+    }
+    .btn-primary:hover {
+      background: #4F6D5C;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(94, 126, 107, 0.30);
+    }
+    .btn-primary:disabled {
+      background: #B5C2BA;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-deep);
+      border: 1.5px solid var(--line);
+    }
+    .btn-secondary:hover {
+      background: #FAF9F5;
+      border-color: var(--accent);
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------- Status messages ---------- */
+    .status {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      display: none;
+    }
+    .status.show { display: block; }
+    .status.success {
+      background: #EAF3EC;
+      color: var(--success);
+      border: 1px solid #CFE3D4;
+    }
+    .status.error {
+      background: #FBECEC;
+      color: var(--error);
+      border: 1px solid #F1D4D4;
+    }
+
+    /* ---------- Confirmation screen ---------- */
+    .confirm {
+      text-align: center;
+      padding: 50px 30px;
+    }
+    .confirm .check {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .confirm h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+    .confirm p {
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto 20px;
+      font-size: 15px;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 30px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 640px) {
+      .wrapper { padding: 28px 16px 60px; }
+      .card { padding: 24px 20px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 14px; }
+      .header h1 { font-size: 22px; }
+      .section-head h2 { font-size: 18px; }
+    }
+
+    /* ---------- Print / Save as PDF ---------- */
+    @media print {
+      body { background: #fff; }
+      .wrapper { padding: 0; max-width: 100%; }
+      .card {
+        box-shadow: none;
+        border: 1px solid #D8D8D8;
+        page-break-inside: avoid;
+        margin-bottom: 16px;
+      }
+      .actions, .btn, .ack-row input { display: none; }
+      .ack-row { background: #F7F7F4; }
+      input, textarea {
+        border: 1px solid #CCC !important;
+        background: #fff !important;
+        box-shadow: none !important;
+      }
+      textarea { min-height: 100px; }
+      .header { margin-bottom: 24px; }
+      .footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- ========== HEADER ==========
+         The form will look for an image at /logo.png, /logo.svg, or /logo.jpg.
+         If one exists, it's used. Otherwise the typographic wordmark is shown.
+         To use your real logo: drop a file named `logo.png` (or .svg / .jpg)
+         into the /public folder. No code changes required.
+    -->
+    <div class="header">
+      <img id="clinicLogo" class="logo" alt="Wellbeing Chiropractic" style="display:none;" />
+      <div id="logoFallback" class="wordmark" aria-label="Wellbeing Chiropractic">
+        <div class="top">Wellbeing</div>
+        <div class="bottom">CHIROPRACTIC</div>
+      </div>
+      <h1>Annual Performance Review</h1>
+      <p class="subtitle">Part A — Employee Self-Reflection · Chiropractic Assistant</p>
+    </div>
+
+    <!-- ========== FORM ========== -->
+    <form id="reviewForm" novalidate>
+
+      <!-- Employee Details -->
+      <div class="card">
+        <div class="section-head">
+          <div class="icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Your Details</h2>
+            <span class="section-sub">Tell us a little about yourself</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="employeeName">Employee Name <span class="required">*</span></label>
+            <input type="text" id="employeeName" name="employeeName" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="managerName">Manager Name <span class="required">*</span></label>
+            <input type="text" id="managerName" name="managerName" required />
+          </div>
+          <div class="field">
+            <label for="reviewDate">Date <span class="required">*</span></label>
+            <input type="date" id="reviewDate" name="reviewDate" required />
+          </div>
+        </div>
+      </div>
+
+      <!-- Self Reflection -->
+      <div class="card">
+        <div class="section-head">
+          <div class="icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4"/><path d="M12 18v4"/>
+              <path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/>
+              <path d="M2 12h4"/><path d="M18 12h4"/>
+              <path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Part A — Self Reflection</h2>
+            <span class="section-sub">Take your time — there are no right or wrong answers</span>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-label">
+            <div class="q-num">1</div>
+            <div class="q-text">What are you enjoying most about your role?</div>
+          </div>
+          <textarea name="q1" required placeholder="Share what's been most rewarding…"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-label">
+            <div class="q-num">2</div>
+            <div class="q-text">What are you not enjoying about your role?</div>
+          </div>
+          <textarea name="q2" required placeholder="Be open — this helps us support you better…"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-label">
+            <div class="q-num">3</div>
+            <div class="q-text">What is a patient interaction you had this year that is memorable or that you’re most fond of?</div>
+          </div>
+          <textarea name="q3" required placeholder="A moment that meant something to you…"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-label">
+            <div class="q-num">4</div>
+            <div class="q-text">Describe a challenging patient situation you faced this year. What did you learn from it?</div>
+          </div>
+          <textarea name="q4" required placeholder="Reflect on what stretched you and what you took away…"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-label">
+            <div class="q-num">5</div>
+            <div class="q-text">What management support would help you perform at your best in the next 12 months?</div>
+          </div>
+          <textarea name="q5" required placeholder="Training, resources, communication, wellbeing…"></textarea>
+        </div>
+      </div>
+
+      <!-- Additional Comments -->
+      <div class="card">
+        <div class="section-head">
+          <div class="icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Additional Comments</h2>
+            <span class="section-sub">Anything else you’d like to share — optional</span>
+          </div>
+        </div>
+        <div class="field">
+          <textarea name="additionalComments" placeholder="Anything else on your mind…"></textarea>
+        </div>
+      </div>
+
+      <!-- Signature & Submit -->
+      <div class="card">
+        <div class="section-head">
+          <div class="icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 17h18"/>
+              <path d="M5 13l4-9 4 9"/>
+              <path d="M14 13c1.5-3 3.5-3 5 0"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Acknowledgment</h2>
+            <span class="section-sub">Confirm and submit</span>
+          </div>
+        </div>
+
+        <div class="ack-row">
+          <input type="checkbox" id="ack" name="ack" required />
+          <label for="ack">
+            I confirm that the responses above are my own honest reflections, completed in good faith for the purpose of my annual performance review.
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="signature">Signature (type your full name) <span class="required">*</span></label>
+            <input type="text" id="signature" name="signature" required />
+          </div>
+          <div class="field">
+            <label for="signatureDate">Date <span class="required">*</span></label>
+            <input type="date" id="signatureDate" name="signatureDate" required />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span id="submitLabel">Submit Self-Reflection</span>
+          </button>
+          <button type="button" id="printBtn" class="btn btn-secondary">Save as PDF / Print</button>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+
+    <!-- Confirmation (hidden until success) -->
+    <div id="confirmCard" class="card" style="display:none;">
+      <div class="confirm">
+        <div class="check" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h2>Thank you — your reflection has been submitted</h2>
+        <p>Your responses have been securely sent to management. We appreciate the time and care you’ve given this.</p>
+      </div>
+    </div>
+
+    <div class="footer">© <span id="year"></span> · Annual Performance Review · Part A of B</div>
+  </div>
+
+  <!-- ============================================================
+       FORM HANDLER
+       Submits to /api/submit on the same origin.
+       Shows loading / success / error states.
+  ============================================================ -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---- Logo auto-loader ----
+    // If a logo file is present in /public, swap it in for the wordmark.
+    // Looks for /logo.svg, then /logo.png, then /logo.jpg (first one wins).
+    (function loadLogo() {
+      const candidates = ['/logo.svg', '/logo.png', '/logo.jpg'];
+      const img = document.getElementById('clinicLogo');
+      const fallback = document.getElementById('logoFallback');
+      let i = 0;
+      function tryNext() {
+        if (i >= candidates.length) return;
+        const probe = new Image();
+        probe.onload  = () => {
+          img.src = candidates[i];
+          img.style.display = 'block';
+          fallback.style.display = 'none';
+        };
+        probe.onerror = () => { i++; tryNext(); };
+        probe.src = candidates[i];
+      }
+      tryNext();
+    })();
+
+    // Default today's date into both date fields for convenience
+    (function setToday() {
+      const today = new Date().toISOString().slice(0, 10);
+      const d1 = document.getElementById('reviewDate');
+      const d2 = document.getElementById('signatureDate');
+      if (d1 && !d1.value) d1.value = today;
+      if (d2 && !d2.value) d2.value = today;
+    })();
+
+    // Print / Save as PDF
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    const form = document.getElementById('reviewForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitLabel = document.getElementById('submitLabel');
+    const statusEl = document.getElementById('status');
+    const confirmCard = document.getElementById('confirmCard');
+
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = 'status show ' + type;
+    }
+    function clearStatus() {
+      statusEl.className = 'status';
+      statusEl.textContent = '';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearStatus();
+
+      // Basic native validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Gather fields
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitLabel.innerHTML = '<span class="spinner"></span> Submitting…';
+
+      try {
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
+
+        // Success — swap to confirmation card
+        form.style.display = 'none';
+        confirmCard.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        setStatus(err.message || 'Submission failed. Please try again, or contact your manager.', 'error');
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Submit Self-Reflection';
+      }
+    });
+  </script>
+</body>
+</html>
